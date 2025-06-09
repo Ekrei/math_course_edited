@@ -1,10 +1,11 @@
-from aiogram import Router, Bot
+from aiogram import Router, Bot, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, PollAnswer
 
 from math_course.entities.quiz import QUIZZES, Question
 from math_course.keyboards.callback import QuizCb
 from math_course.states import QuizState
+from math_course.handlers.user_flow import first_lesson, second_lesson, third_lesson, fourth_lesson
 
 quiz_router = Router()
 
@@ -73,3 +74,12 @@ async def check_answer(
 
     question = quiz.questions[question_index]
     await _send_poll(bot, poll_answer.user.id, question)
+
+
+@quiz_router.callback_query(F.data.startswith("quiz_"))
+async def quiz_handler(callback: CallbackQuery):
+    quiz_id = int(callback.data.split("_")[1])
+    quiz = QUIZZES[quiz_id]
+    
+    if quiz.callback:
+        await quiz.callback(callback)

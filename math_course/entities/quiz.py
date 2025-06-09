@@ -3,8 +3,7 @@ from typing import Awaitable, Callable
 from aiogram.types import PollAnswer
 from pydantic.dataclasses import dataclass
 
-from math_course.handlers.user_flow import first_lesson, second_lesson, sixth_lesson, \
-    final_test_done
+from math_course.handlers.user_flow import first_lesson, second_lesson, third_lesson, fourth_lesson, sixth_lesson, final_test_done
 
 
 @dataclass
@@ -79,44 +78,210 @@ QUIZZES = [
     Quiz(
         questions=[
             Question(
-                text="Выберете верное высказывание",
+                text=(
+                    "В параллелограмме ABCD диагональ AC равна 8, а сторона AB равна 5. "
+                    "Найдите периметр параллелограмма, если его площадь равна 24."
+                ),
                 answers=[
-                    Answer(
-                        text=(
-                            "Биссектриса параллелограмма отсекает от него"
-                            " равносторонний треугольник"
-                        )
-                    ),
-                    Answer(
-                        text=(
-                            "Биссектрисы углов, прилежащих к одной стороне "
-                            "параллелограмма пересекаются под острым углом"
-                        )
-                    ),
-                    Answer(
-                        text=(
-                            "Отрезки биссектрис противоположных углов "
-                            "равны и параллельны"
-                        )
-                    ),
+                    Answer(text="20"),
+                    Answer(text="22"),
+                    Answer(text="24"),
+                    Answer(text="26"),
                 ],
                 correct_answer_index=1
             ),
             Question(
                 text=(
-                    "Выберете верные формулы площади\n"
-                    "а) S = a × b × sinα\n"
-                    "б) S = 0,5 × (d1 × d2)"
+                    "В параллелограмме ABCD биссектриса угла A пересекает сторону BC "
+                    "в точке M. Найдите BM, если AB = 6, BC = 4."
                 ),
                 answers=[
-                    Answer(text="а"),
-                    Answer(text="б"),
-                    Answer(text="все верные")
+                    Answer(text="2"),
+                    Answer(text="2.5"),
+                    Answer(text="3"),
+                    Answer(text="3.5"),
+                ],
+                correct_answer_index=0
+            ),
+            Question(
+                text=(
+                    "В параллелограмме ABCD проведены биссектрисы углов A и B, "
+                    "которые пересекаются в точке M. Найдите угол AMB."
+                ),
+                answers=[
+                    Answer(text="45°"),
+                    Answer(text="60°"),
+                    Answer(text="90°"),
+                    Answer(text="120°"),
                 ],
                 correct_answer_index=2
             ),
         ],
         callback=second_lesson,
+    ),
+    Quiz(
+        questions=[
+            Question(
+                text=(
+                    "Даны векторы a(16; -0,4) и b(2;5).\n"
+                    "Найдите скалярное произведение a*b"
+                ),
+                answers=[
+                    Answer(text="25"),
+                    Answer(text="35"),
+                    Answer(text="30"),
+                ],
+                correct_answer_index=2,
+            ),
+            Question(
+                text=(
+                    "Векторы a и b образуют угол 60°. Известно, что |a| = 3, |b| = 4. "
+                    "Найдите |a + b|."
+                ),
+                answers=[
+                    Answer(text="5"),
+                    Answer(text="6"),
+                    Answer(text="7"),
+                    Answer(text="8"),
+                ],
+                correct_answer_index=1,
+            ),
+            Question(
+                text=(
+                    "Векторы a и b перпендикулярны. Известно, что |a| = 5, |b| = 12. "
+                    "Найдите |a - b|."
+                ),
+                answers=[
+                    Answer(text="13"),
+                    Answer(text="14"),
+                    Answer(text="15"),
+                    Answer(text="16"),
+                ],
+                correct_answer_index=0,
+            ),
+        ],
+        callback=third_lesson,
+    ),
+    Quiz(
+        questions=[
+            Question(
+                text=(
+                    "В равнобедренной трапеции ABCD с основаниями AD и BC "
+                    "диагональ AC перпендикулярна боковой стороне CD. "
+                    "Найдите площадь трапеции, если AD = 12, BC = 4."
+                ),
+                answers=[
+                    Answer(text="32"),
+                    Answer(text="36"),
+                    Answer(text="40"),
+                    Answer(text="48"),
+                ],
+                correct_answer_index=1
+            ),
+            Question(
+                text=(
+                    "В трапеции ABCD с основаниями AD и BC диагонали пересекаются "
+                    "в точке O. Площадь треугольника AOD равна 16, а площадь "
+                    "треугольника BOC равна 4. Найдите площадь трапеции."
+                ),
+                answers=[
+                    Answer(text="36"),
+                    Answer(text="40"),
+                    Answer(text="44"),
+                    Answer(text="48"),
+                ],
+                correct_answer_index=0
+            ),
+            Question(
+                text=(
+                    "В трапеции ABCD с основаниями AD и BC проведена средняя линия MN. "
+                    "Найдите площадь трапеции, если площадь треугольника MNC равна 12, "
+                    "а площадь треугольника MND равна 8."
+                ),
+                answers=[
+                    Answer(text="40"),
+                    Answer(text="48"),
+                    Answer(text="56"),
+                    Answer(text="64"),
+                ],
+                correct_answer_index=2
+            ),
+            Question(
+                text=(
+                    "В трапеции ABCD с основаниями AD и BC проведены высоты BH и CK. "
+                    "Найдите площадь трапеции, если BH = 6, CK = 8, а основания "
+                    "относятся как 2:3."
+                ),
+                answers=[
+                    Answer(text="60"),
+                    Answer(text="72"),
+                    Answer(text="84"),
+                    Answer(text="96"),
+                ],
+                correct_answer_index=1
+            ),
+        ],
+        callback=fourth_lesson,
+    ),
+    Quiz(
+        questions=[
+            Question(
+                text=(
+                    "В окружности радиуса 5 проведены две хорды AB и CD, "
+                    "пересекающиеся в точке M. Найдите длину хорды AB, если "
+                    "AM = 3, CM = 4, DM = 6."
+                ),
+                answers=[
+                    Answer(text="8"),
+                    Answer(text="9"),
+                    Answer(text="10"),
+                    Answer(text="12"),
+                ],
+                correct_answer_index=1
+            ),
+            Question(
+                text=(
+                    "В окружности проведены две пересекающиеся хорды AB и CD. "
+                    "Найдите длину хорды CD, если AB = 12, а отрезки, на которые "
+                    "делится точка пересечения хорду AB, равны 3 и 9."
+                ),
+                answers=[
+                    Answer(text="6"),
+                    Answer(text="8"),
+                    Answer(text="10"),
+                    Answer(text="12"),
+                ],
+                correct_answer_index=0
+            ),
+            Question(
+                text=(
+                    "В окружности радиуса 13 проведена хорда AB длиной 24. "
+                    "Найдите расстояние от центра окружности до хорды AB."
+                ),
+                answers=[
+                    Answer(text="5"),
+                    Answer(text="6"),
+                    Answer(text="7"),
+                    Answer(text="8"),
+                ],
+                correct_answer_index=0
+            ),
+            Question(
+                text=(
+                    "В окружности проведены две хорды AB и CD, пересекающиеся "
+                    "в точке M. Найдите длину хорды CD, если AM = 4, BM = 6, "
+                    "CM = 3."
+                ),
+                answers=[
+                    Answer(text="5"),
+                    Answer(text="6"),
+                    Answer(text="7"),
+                    Answer(text="8"),
+                ],
+                correct_answer_index=2
+            ),
+        ],
+        callback=fourth_lesson,
     ),
     Quiz(
         questions=[
@@ -321,5 +486,48 @@ QUIZZES = [
             ),
         ],
         callback=final_test_done,
-    )
+    ),
+    Quiz(
+        questions=[
+            Question(
+                text=(
+                    "В прямоугольном параллелепипеде ABCDA1B1C1D1 ребра AB, AD и AA1 равны 3, 4 и 5 соответственно. "
+                    "Найдите площадь сечения, проходящего через вершины A, C и B1."
+                ),
+                answers=[
+                    Answer(text="15"),
+                    Answer(text="20"),
+                    Answer(text="25"),
+                    Answer(text="30"),
+                ],
+                correct_answer_index=1
+            ),
+            Question(
+                text=(
+                    "В кубе ABCDA1B1C1D1 найдите угол между плоскостями ABC и A1B1C1."
+                ),
+                answers=[
+                    Answer(text="0°"),
+                    Answer(text="45°"),
+                    Answer(text="90°"),
+                    Answer(text="180°"),
+                ],
+                correct_answer_index=0
+            ),
+            Question(
+                text=(
+                    "В правильной треугольной призме ABCA1B1C1 все ребра равны 1. "
+                    "Найдите расстояние от точки A до плоскости BCA1."
+                ),
+                answers=[
+                    Answer(text="1/2"),
+                    Answer(text="1/3"),
+                    Answer(text="1/4"),
+                    Answer(text="1/6"),
+                ],
+                correct_answer_index=1
+            ),
+        ],
+        callback=sixth_lesson,
+    ),
 ]

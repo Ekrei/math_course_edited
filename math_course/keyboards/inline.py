@@ -7,6 +7,24 @@ from math_course.entities.video import Video
 from math_course.keyboards.callback import QuizCb, VideoCb
 
 
+def get_main_menu_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    builder.button(
+        text="📝 Начать обучение",
+        callback_data="start_learning"
+    )
+    builder.button(
+        text="ℹ️ О курсе",
+        callback_data="about_course"
+    )
+    builder.button(
+        text="📚 Структура курса",
+        callback_data="course_structure"
+    )
+    builder.adjust(1)
+    return builder.as_markup()
+
+
 def get_quiz_keyboard(quiz_id: int) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     builder.button(
@@ -150,5 +168,20 @@ def get_video_keyboard(video: Video) -> InlineKeyboardMarkup:
     builder.button(
         **asdict(video.button),
     )
+    builder.adjust(1)
+    return builder.as_markup()
+
+
+def get_previous_lessons_keyboard(current_lesson: int) -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    
+    # Add buttons for all previous lessons
+    for i in range(current_lesson):
+        lesson_number = i + 1
+        builder.button(
+            text=f"📚 Урок {lesson_number}",
+            callback_data=f"return_to_lesson_{lesson_number}"
+        )
+    
     builder.adjust(1)
     return builder.as_markup()
